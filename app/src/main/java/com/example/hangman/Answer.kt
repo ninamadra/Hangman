@@ -1,10 +1,14 @@
 package com.example.hangman
 
-class Answer {
+import android.content.Context
+import kotlin.random.Random
+
+
+class Answer(private val context: Context) {
     val word = generateWord()
     val letters = generateLetters()
     private var guessed = 0
-    private var badGuesses = 0
+    var badGuesses = 0
     var hang = false
 
     private fun generateLetters(): ArrayList<Letter> {
@@ -16,9 +20,8 @@ class Answer {
     }
 
     private fun generateWord(): String {
-        return "biurko"
-        //TODO: generowanie slowa
-
+        val array = context.resources.getStringArray(R.array.words)
+        return array[Random.nextInt(array.size)]
     }
 
     fun check(guess: Char) {
@@ -58,7 +61,7 @@ class Answer {
     }
 
     companion object {
-        const val noChances = 7
+        const val noChances = 6
     }
 
 
